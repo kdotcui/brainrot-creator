@@ -96,3 +96,8 @@ BrainRot Creator lets you generate 45-second video narratives with emotional sce
 - **Frontend**: Next.js, React, TailwindCSS
 - **Backend**: Python, Quart, OpenAI API
 - **AI**: DeepSeek AI for narrative generation
+
+
+## Todo
+
+- Consider video style (realistic (.r3d) file format, animated, cartoon)

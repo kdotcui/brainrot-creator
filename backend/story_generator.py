@@ -29,9 +29,8 @@ class StoryGenerator:
 Each story must be structured as a series of emotionally charged visual scene depctions, with each scene lasting no more than 8 seconds of screen time.
 These stories must take the viewer on a dramatic rollercoaster — filled with sensational highs (e.g. victory, joy, surprise)
 and miserable lows (e.g. betrayal, defeat, sorrow), while remaining tight, vivid, and emotionally gripping.
-The scene_count should count up the total number of scenes created, total_duration should be the total number of seconds of the scenes,
-and summary should be a create a summary of this story, with the temperature set to 1.3
-
+The scene_count should count up the total number of scenes created, total_duration should be the total number of seconds of the scenes
+The summary should describe the stories scenes, similar to the summary in the response template
 Respond in the following format only:
 <response>
 {
@@ -72,4 +71,5 @@ Make the pacing fast, the emotions raw, and the transitions clear. End with impa
 
         result = response.choices[0].message.content
         print(result)
+        print(response)
         return result 
