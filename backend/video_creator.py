@@ -26,7 +26,7 @@ class VideoCreator:
 				{
 					"role": "system",
 					"content": """You are a master storyteller writing cinematic scripts for 45-second short videos.
-	Each story must be structured as a series of emotionally charged scenes with clean transitions, with each scene lasting no more than 8 seconds of screen time.
+	Each story must be structured as a series of emotionally charged visual scene depctions, with each scene lasting no more than 8 seconds of screen time.
 	These stories must take the viewer on a dramatic rollercoaster — filled with sensational highs (e.g. victory, joy, surprise)
 	and miserable lows (e.g. betrayal, defeat, sorrow), while remaining tight, vivid, and emotionally gripping.
 
@@ -46,7 +46,8 @@ class VideoCreator:
 			},
 			...
 		],
-		"scene_count": 10
+		"scene_count": 10,
+		"total_duration": 40
 	}
 	</response>
 

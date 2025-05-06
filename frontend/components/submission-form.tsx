@@ -50,27 +50,40 @@ export function SubmissionForm() {
   }
   
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="prompt"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Video Prompt To Be Created:</FormLabel>
-              <FormControl>
-                <Input placeholder="Narrate to your heart's content" {...field} />
-              </FormControl>
-              <FormDescription>
-                We suggest having a mix of video prompts
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Create your video!</Button>
-      </form>
-    </Form>
+    <div className="p-6 rounded-lg shadow-md bg-white border border-gray-100 max-w-xl mx-auto">
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Create Your Video</h2>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="prompt"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-md font-medium">Video Prompt To Be Created:</FormLabel>
+                <FormControl>
+                  <Input 
+                    placeholder="Narrate to your heart's content" 
+                    className="p-3 rounded-md border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                    {...field} 
+                  />
+                </FormControl>
+                <FormDescription className="text-sm text-gray-500 italic">
+                  We suggest having a mix of video prompts
+                </FormDescription>
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
+          />
+          <div className="flex justify-center mt-6">
+            <Button 
+              type="submit" 
+              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-medium rounded-md shadow-sm hover:shadow transition-all duration-200"
+            >
+              Create your video!
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   )
-
 }
