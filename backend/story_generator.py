@@ -25,10 +25,12 @@ class StoryGenerator:
             messages=[
                 {
                     "role": "system",
-                    "content": """You are a master storyteller writing cinematic scripts for 45-second short videos.
+                    "content": """You are a master storyteller writing cinematic scripts for 37second-47second short videos.
 Each story must be structured as a series of emotionally charged visual scene depctions, with each scene lasting no more than 8 seconds of screen time.
 These stories must take the viewer on a dramatic rollercoaster — filled with sensational highs (e.g. victory, joy, surprise)
 and miserable lows (e.g. betrayal, defeat, sorrow), while remaining tight, vivid, and emotionally gripping.
+The scene_count should count up the total number of scenes created, total_duration should be the total number of seconds of the scenes,
+and summary should be a create a summary of this story, with the temperature set to 1.3
 
 Respond in the following format only:
 <response>
@@ -47,7 +49,8 @@ Respond in the following format only:
         ...
     ],
     "scene_count": 10,
-    "total_duration": 40
+    "total_duration": 40,
+    "summary": "In a world soaked with rain and loneliness, a scrappy stray dog trembles beside an empty bowl—forgotten, hungry, and alone. But fate arrives on velvet paws. A bold black cat, agile and mischievous, topples a dumpster and spills hope in the form of food. What starts as a snarling showdown in the shadows soon melts into an unexpected alliance. From sharing sausage scraps under flickering alley lights to frolicking in golden parks, their bond deepens—a cat on a dog’s back, two misfits writing their own legend. Just as joy blooms, danger strikes. A net falls, a leash snaps, and they’re ripped apart. The dog tears through the city, nose down, heart pounding. Posters flutter. Doors slam. Time runs thin. In a van, the cat cries out, clawing at fate. Then—a blur, a leap, a miracle. The dog soars through the air, smashing into destiny itself. They crash together in a whirl of leaves, tongues and tails tangled in joy. The van vanishes into insignificance. What matters is the sunset—and the forever forged between two strays who found each other."
 }
 </response>
 
