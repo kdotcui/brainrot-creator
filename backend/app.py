@@ -3,6 +3,7 @@ from openai import OpenAI
 from quart_cors import cors
 from dotenv import load_dotenv
 import asyncio, json, os, tempfile
+from video_creator import VideoCreator
 
 
 
@@ -12,6 +13,8 @@ load_dotenv()
 
 DEEKSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 client = OpenAI(api_key=f"{DEEKSEEK_API_KEY}", base_url="https://api.deepseek.com")
+
+video_creator = VideoCreator()
 
 
 @app.route('/api/test', methods=['GET'])
@@ -23,20 +26,11 @@ async def test():
 async def create_video():
     prompt = request.args.get('prompt')  # Grabs ?prompt=... from the URL
     print("sent: ", prompt)
-    return jsonify(prompt)
-    # print()
-    # response = client.chat.completions.create(
-    #     model="deepseek-chat",
-    #     messages=[
-    #         {"role": "system", "content": f"{"hello monkey"}"},
-    #         {"role": "user", "content": "Hello"},
-    #     ],
-    #     temperature=1.4,
-    #     stream=False
-    # )
-    # result = response.choices[0].message.content
-    # print(result)
-    # return response.choices[0].message.content
+    generated_story = await video_creator.generate_story(prompt)
+    print(generated_story)
+
+    return jsonify(generated_story)
+
     
     
 
