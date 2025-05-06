@@ -1,10 +1,10 @@
 # BrainRot Creator
 
-A web application that generates cinematic short video scripts using AI.
+A web application that generates cinematic tiktok/reels/shorts type videos using the greatest Chinese developments in AI technology to accelerate the brain degredation of the American Youth (joke). 
 
 ## Overview
 
-BrainRot Creator lets you generate 45-second video narratives with emotional scenes based on your text prompts. The application uses DeepSeek's AI to create structured stories with distinct scenes.
+BrainRot Creator lets you generate 45-second video narratives with emotional scenes based on your text prompts. The application uses DeepSeek's AI to create structured stories with distinct scenes. We then use MiniMax to generate an accompanying video for each scene. End result is a video that 
 
 ## Features
 
