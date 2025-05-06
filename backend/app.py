@@ -25,7 +25,7 @@ async def test():
 @app.route('/api/createvideo', methods=['GET'])
 async def create_video():
     prompt = request.args.get('prompt')  # Grabs ?prompt=... from the URL
-    print("sent: ", prompt)
+    print("Starting Prompt:", prompt)
     generated_story = await video_creator.generate_story(prompt)
     print(generated_story)
 

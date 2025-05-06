@@ -18,8 +18,6 @@ class VideoCreator:
 			base_url="https://api.deepseek.com"
 		)
 	async def generate_story(self, prompt_text: str) -> str:
-		print("Starting Prompt:", prompt_text)
-		
 		response = self.client.chat.completions.create(
 			model="deepseek-chat",
 			messages=[
