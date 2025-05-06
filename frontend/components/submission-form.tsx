@@ -29,8 +29,24 @@ export function SubmissionForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    const query = encodeURIComponent(values.prompt)
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/createvideo?prompt=${query}`, {
+        method: "GET",
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch from backend")
+      }
+  
+      const data = await response.json()
+      console.log("Response from backend:", data)
+    } catch (error) {
+      console.error("Error during fetch:", error)
+    }
   }
   
   return (
