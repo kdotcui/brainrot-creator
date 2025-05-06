@@ -4,7 +4,7 @@ A web application that generates cinematic tiktok/reels/shorts type videos using
 
 ## Overview
 
-BrainRot Creator lets you generate 45-second video narratives with emotional scenes based on your text prompts. The application uses DeepSeek's AI to create structured stories with distinct scenes. We then use MiniMax to generate an accompanying video for each scene. End result is a video that 
+BrainRot Creator lets you generate 45-second video narratives with emotional scenes based on your text prompts. The application uses DeepSeek's AI to create structured stories with distinct scenes. We then use MiniMax to generate an accompanying video for each scene. End result is a video that you can download, then upload to your choice of social media.
 
 ## Features
 
