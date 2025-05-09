@@ -5,13 +5,13 @@ from dotenv import load_dotenv
 class StoryGenerator:
     def __init__(self):
         load_dotenv()
-        self.LLM_API_KEY = os.getenv("DEEPSEEK_API_KEY")
-        if not self.LLM_API_KEY:
+        self.DEEKSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
+        if not self.DEEKSEEK_API_KEY:
             raise ValueError("Missing DEEPSEEK_API_KEY environment variable")
         
-        print(f"Initializing DeepSeek client with API key starting with: {self.LLM_API_KEY[:4]}...")
+        print(f"Initializing DeepSeek client with API key starting with: {self.DEEKSEEK_API_KEY[:4]}...")
         self.client = OpenAI(
-            api_key=f"{self.LLM_API_KEY}", 
+            api_key=f"{self.DEEKSEEK_API_KEY}", 
             base_url="https://api.deepseek.com"
         )
 
