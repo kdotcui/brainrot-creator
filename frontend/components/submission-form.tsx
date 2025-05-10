@@ -22,8 +22,11 @@ const formSchema = z.object({
   })
 })
 
-export function SubmissionForm() {
-  const [storyPreview, setStoryPreview] = useState<string | null>(null);
+interface SubmissionFormProps {
+  onStoryGenerated?: (summary: string) => void;
+}
+
+export function SubmissionForm({ onStoryGenerated }: SubmissionFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -37,9 +40,10 @@ export function SubmissionForm() {
     setIsLoading(true)
     console.log(values)
     const query = encodeURIComponent(values.prompt)
-
+    // Use environment variable for backend URL with fallback
+    const backendUrl = process.env.NEXT_PUBLIC_FLASK_BACKEND_URL || 'http://localhost:5000';
     try {
-      const response = await fetch(`http://localhost:5000/api/createvideo?prompt=${query}`, {
+      const response = await fetch(`${backendUrl}/api/createvideo?prompt=${query}`, {
         method: "GET",
       })
 
@@ -49,8 +53,11 @@ export function SubmissionForm() {
 
       const data = await response.json()
       console.log("Response from backend:", data)
-      setStoryPreview(data.summary)
-      console.log("STORY PREVIEW: ",storyPreview)
+      
+      // Call the callback with the story summary if it exists
+      if (onStoryGenerated && data.summary) {
+        onStoryGenerated(data.summary)
+      }
     } catch (error) {
       console.error("Error during fetch:", error)
     } finally {
@@ -86,9 +93,10 @@ export function SubmissionForm() {
           <div className="flex justify-center mt-6">
             <Button 
               type="submit" 
+              disabled={isLoading}
               className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-medium rounded-md shadow-sm hover:shadow transition-all duration-200"
             >
-              Create your video!
+              {isLoading ? "Creating..." : "Create your video!"}
             </Button>
           </div>
         </form>
