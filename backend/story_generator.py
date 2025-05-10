@@ -26,7 +26,7 @@ class StoryGenerator:
                 {
                     "role": "system",
                     "content": """You are a master storyteller writing cinematic scripts for 37second-47second short videos.
-Each story must be structured as a series of emotionally charged visual scene depctions, with each scene lasting no more than 8 seconds of screen time.
+Each story must be structured as a series of emotionally charged visual scene depctions, with each scene lasting exactly 5 seconds of screen time.
 These stories must take the viewer on a dramatic rollercoaster — filled with sensational highs (e.g. victory, joy, surprise)
 and miserable lows (e.g. betrayal, defeat, sorrow), while remaining tight, vivid, and emotionally gripping.
 The scene_count should count up the total number of scenes created, total_duration should be the total number of seconds of the scenes
@@ -38,7 +38,7 @@ Respond in the following format only:
         {
             "scene": "Scene 1: [Short Title]",
             "description": "Describe what happens in this part of the story in rich, visual detail. Make it emotionally powerful."
-            "duration": 3
+            "duration": 5
         },
         {
             "scene": "Scene 2: [Short Title]",
