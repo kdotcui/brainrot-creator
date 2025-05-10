@@ -1,5 +1,5 @@
 from openai import OpenAI
-import os
+import os, re, json
 from dotenv import load_dotenv
 
 class StoryGenerator:
@@ -69,7 +69,37 @@ Make the pacing fast, the emotions raw, and the transitions clear. End with impa
             stream=False,
         )
 
-        result = response.choices[0].message.content
-        print(result)
-        print(response)
-        return result 
+        raw_result = response.choices[0].message.content
+        print(raw_result)
+
+        try:
+            # Find JSON content between <response> tags
+            match = re.search(r'<response>\s*(.*?)\s*</response>', raw_result, re.DOTALL)
+            if not match:
+                raise ValueError("Response format not as expected: missing <response> tags")
+            
+            json_str = match.group(1)
+            # Parse the JSON string into a Python dictionary
+            story_data = json.loads(json_str)
+            
+            # Validate that required fields exist
+            required_fields = ["scenes", "scene_count", "total_duration", "summary"]
+            for field in required_fields:
+                if field not in story_data:
+                    raise ValueError(f"Response missing required field: {field}")
+            
+            return story_data
+        except json.JSONDecodeError as e:
+            print(f"Error parsing JSON: {e}")
+            print(f"Problematic JSON string: {json_str}")
+            # Return a simple error object that's still valid JSON
+            return {
+                "error": "Failed to parse the story response",
+                "raw_response": raw_result
+            }
+        except Exception as e:
+            print(f"Error processing response: {e}")
+            return {
+                "error": str(e),
+                "raw_response": raw_result
+            }
