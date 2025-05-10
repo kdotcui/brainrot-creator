@@ -2,6 +2,8 @@
 
 #backend
 /backend/venv
+/backend/mp4
+*.mp4
 
 
 # dependencies
