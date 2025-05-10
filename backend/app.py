@@ -31,8 +31,6 @@ async def create_video():
 
     return jsonify(generated_story)
 
-    
-    
 
 if __name__ == '__main__':
     app.run()

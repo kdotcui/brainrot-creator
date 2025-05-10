@@ -46,10 +46,11 @@ export function SubmissionForm() {
       if (!response.ok) {
         throw new Error("Failed to fetch from backend")
       }
-  
+
       const data = await response.json()
-      setStoryPreview(data)
       console.log("Response from backend:", data)
+      setStoryPreview(data.summary)
+      console.log("STORY PREVIEW: ",storyPreview)
     } catch (error) {
       console.error("Error during fetch:", error)
     } finally {
