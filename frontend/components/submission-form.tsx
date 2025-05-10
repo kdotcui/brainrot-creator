@@ -23,11 +23,12 @@ const formSchema = z.object({
 })
 
 interface SubmissionFormProps {
-  onStoryGenerated?: (summary: string) => void;
+  onRawDataReceived?: (data: any) => void;
 }
 
-export function SubmissionForm({ onStoryGenerated }: SubmissionFormProps) {
+export function SubmissionForm({ onRawDataReceived }: SubmissionFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [storySummary, setStorySummary] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,6 +43,7 @@ export function SubmissionForm({ onStoryGenerated }: SubmissionFormProps) {
     const query = encodeURIComponent(values.prompt)
     // Use environment variable for backend URL with fallback
     const backendUrl = process.env.NEXT_PUBLIC_FLASK_BACKEND_URL || 'http://localhost:5000';
+
     try {
       const response = await fetch(`${backendUrl}/api/createvideo?prompt=${query}`, {
         method: "GET",
@@ -54,9 +56,14 @@ export function SubmissionForm({ onStoryGenerated }: SubmissionFormProps) {
       const data = await response.json()
       console.log("Response from backend:", data)
       
-      // Call the callback with the story summary if it exists
-      if (onStoryGenerated && data.summary) {
-        onStoryGenerated(data.summary)
+      // Update local state with the summary
+      if (data.summary) {
+        setStorySummary(data.summary)
+      }
+      
+      // Pass the raw data to the parent component
+      if (onRawDataReceived) {
+        onRawDataReceived(data);
       }
     } catch (error) {
       console.error("Error during fetch:", error)
@@ -67,7 +74,7 @@ export function SubmissionForm({ onStoryGenerated }: SubmissionFormProps) {
   
   return (
     <div className="p-6 rounded-lg shadow-md bg-white border border-gray-100 max-w-xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Create Your Video</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Create a story for your video</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -96,11 +103,19 @@ export function SubmissionForm({ onStoryGenerated }: SubmissionFormProps) {
               disabled={isLoading}
               className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-medium rounded-md shadow-sm hover:shadow transition-all duration-200"
             >
-              {isLoading ? "Creating..." : "Create your video!"}
+              {isLoading ? "Creating..." : "Create your story!"}
             </Button>
           </div>
         </form>
       </Form>
+      
+      {/* Story Summary Section */}
+      {storySummary && (
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <h3 className="text-xl font-semibold mb-4 text-gray-800">Story Summary</h3>
+          <p className="text-gray-700 leading-relaxed">{storySummary}</p>
+        </div>
+      )}
     </div>
   )
 }

@@ -1,13 +1,15 @@
 "use client"
 
 import { SubmissionForm } from "@/components/submission-form";
+import { VideoCreation } from "@/components/video-creation";
 import { useState } from "react"
 
 export default function Home() {
-  const [storySummary, setStorySummary] = useState<string | null>(null);
+  const [storyData, setStoryData] = useState<any>(null);
 
-  const handleStoryGenerated = (summary: string) => {
-    setStorySummary(summary);
+  const handleRawDataReceived = (data: any) => {
+    setStoryData(data);
+    console.log("Raw story data received in home page:", data);
   };
 
   return (
@@ -21,16 +23,14 @@ export default function Home() {
       
       <main className="container mx-auto px-4 py-12">
         <div className="flex flex-col md:flex-row gap-8">
+          {/* Left Column - Story Creation */}
           <div className="w-full md:w-1/2">
-            <SubmissionForm onStoryGenerated={handleStoryGenerated} />
+            <SubmissionForm onRawDataReceived={handleRawDataReceived} />
           </div>
-          <div className="w-full md:w-1/2 flex flex-col p-6 rounded-lg shadow-md bg-white border border-gray-100 max-w-xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Story Summary</h2>
-            {storySummary ? (
-              <p className="text-gray-700 leading-relaxed">{storySummary}</p>
-            ) : (
-              <p className="text-gray-500 italic text-center">Your story summary will appear here...</p>
-            )}
+          
+          {/* Right Column - Video Creation */}
+          <div className="w-full md:w-1/2">
+            <VideoCreation storyData={storyData} />
           </div>
         </div>
       </main>
