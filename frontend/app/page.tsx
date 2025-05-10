@@ -16,20 +16,7 @@ export default function Home() {
             <SubmissionForm />
           </div>
           <div className="w-full md:w-1/2 flex items-center justify-center">
-            <div className="bg-white p-8 rounded-lg shadow-md border border-gray-100">
-              <h2 className="text-xl font-semibold mb-4 text-gray-800">How It Works</h2>
-              <ol className="space-y-3 text-gray-700">
-                <li className="flex gap-2">
-                  <span className="font-bold">1.</span> Enter your video prompt
-                </li>
-                <li className="flex gap-2">
-                  <span className="font-bold">2.</span> Click the create button
-                </li>
-                <li className="flex gap-2">
-                  <span className="font-bold">3.</span> Download your amazing video
-                </li>
-              </ol>
-            </div>
+            <div>Summary</div>
           </div>
         </div>
       </main>

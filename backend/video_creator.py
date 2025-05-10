@@ -12,6 +12,8 @@ class VideoCreator:
 	async def generate_story(self, prompt_text: str) -> str:
 		"""Generate a story using the StoryGenerator."""
 		return await self.story_generator.generate_story(prompt_text)
+	
+	
 
 
 

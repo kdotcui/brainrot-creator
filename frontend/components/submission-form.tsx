@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useState } from "react"
 
 const formSchema = z.object({
   prompt: z.string().min(10, {
@@ -22,6 +23,9 @@ const formSchema = z.object({
 })
 
 export function SubmissionForm() {
+  const [storyPreview, setStoryPreview] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,6 +34,7 @@ export function SubmissionForm() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true)
     console.log(values)
     const query = encodeURIComponent(values.prompt)
 
@@ -43,9 +48,12 @@ export function SubmissionForm() {
       }
   
       const data = await response.json()
+      setStoryPreview(data)
       console.log("Response from backend:", data)
     } catch (error) {
       console.error("Error during fetch:", error)
+    } finally {
+      setIsLoading(false)
     }
   }
   
@@ -68,7 +76,7 @@ export function SubmissionForm() {
                   />
                 </FormControl>
                 <FormDescription className="text-sm text-gray-500 italic">
-                  We suggest having a mix of video prompts
+                  Ex: "I want a love story between a tiger and a lioness"
                 </FormDescription>
                 <FormMessage className="text-red-500" />
               </FormItem>
